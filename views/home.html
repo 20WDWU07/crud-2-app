@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <div class="container">
+        <h1>Comment App</h1>
+        <div class="insert_post">
+            <form action="" method="POST">
+                <label for="post_title">Comment Title</label>
+                <input type="text" name="title" placeholder="Enter post title" id="post_title" required>
+                <label for="post_content">Write your comment</label>
+                <textarea name="content" id="post_content" placeholder="Write something..." required></textarea>
+                <label for="author_name">Author Name</label>
+                <input type="text" name="author" placeholder="Enter author name" id="author_name" required>
+                <input type="submit" value="POST">
+            </form>
+        </div>
+        <hr>
+        <h2>Latest Updates</h2>
+        <div class="all_posts">
+            {% for post in allpost %}
+            <div>
+               <span class="post_title">{{post.title |e}}</span> 
+               <span class="post_author">{{post.author_name |e}}</span> 
+               <span class="post_date">Date: {{post.createdAt | date("d M, Y")}}</span>
+               <span class="post_comment">{{post.content |e}}</span> 
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
