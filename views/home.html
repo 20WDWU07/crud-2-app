@@ -26,6 +26,11 @@
                <span class="post_author">{{post.author_name |e}}</span> 
                <span class="post_date">Date: {{post.createdAt | date("d M, Y")}}</span>
                <span class="post_comment">{{post.content |e}}</span> 
+               <div class="post-actions">
+                   <a href="/edit/{{post._id}}" class="edit-btn">Edit</a>
+                   <span> </span>
+                   <a href="/delete/{{post._id}}" class="delete-btn">Delete</a>
+               </div>
             </div>
             {% endfor %}
         </div>

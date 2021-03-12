@@ -70,6 +70,61 @@ app.get('/', (req, res) => {
     }); 
 });
 
+// delete function
+app.get('/delete/:id', (req, res) => {
+    Post.findByIdAndDelete(req.params.id)
+    .then(result => {
+        res.redirect('/');
+    })
+    .catch(err => {
+        console.log(err);
+        res.redirect('/');
+    })
+});
+
+// EDIT POST
+app.get('/edit/:id', (req, res) => {
+
+    Post.findById(req.params.id)
+    .then(result => {
+        if(result){
+            res.render('edit',{
+                post:result
+            });
+        }
+        else{
+            res.redirect('/');
+        }
+    })
+    .catch(err => {
+        res.redirect('/');
+    });
+});
+
+// UPDATE POST
+app.post('/edit/:id', (req, res) => {
+    Post.findById(req.params.id)
+    .then(result => {
+        if(result){
+            result.title = req.body.title;
+            result.content = req.body.content;
+            result.author_name = req.body.author;
+            return result.save();
+        }
+        else{
+            console.log(err);
+            res.redirect('/');
+        }
+    })
+    .then(update => {
+        res.redirect('/');
+    })
+    .catch(err => {
+        res.redirect('/');
+    });
+});
+
+
 // if we want to use a GET function which will send the /hello page to a view
 // app.get('/hello', (req, res) => {
 //  res.sendFile(__dirname + '/views/hello.html');
